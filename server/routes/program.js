@@ -1,5 +1,6 @@
 const route = require("express").Router();
 const pool = require("../db");
+
 route.get("/get-faculty", async (req, res) => {
   let result = null;
 
@@ -32,6 +33,72 @@ route.get("/get-faculty", async (req, res) => {
   res.json(result);
 });
 
+route.post("/create-programs", async (req, res)=>{
+  const {
+    name,
+    price,
+    domain,
+    program_type,
+    registrations_status,
+    description,
+    placement_assurance,
+    image_url,
+    university_name,
+    learning_hours,
+    duration,
+    certificate_diploma,
+    eligibility_criteria,
+    faculty,
+  } = req.body;
+
+  const queryText = `
+  INSERT INTO programs (
+    name, price, domain, program_type, registrations_status,
+    description, placement_assurance, image_url, university_name,
+    learning_hours, duration, certificate_diploma, eligibility_criteria
+  ) 
+  VALUES (
+    $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13
+  )
+  RETURNING *;
+`;
+
+  const values = [
+    name,
+    price,
+    domain,
+    program_type,
+    registrations_status,
+    description,
+    placement_assurance,
+    image_url,
+    university_name,
+    learning_hours,
+    duration,
+    certificate_diploma,
+    eligibility_criteria,
+  ];
+
+  try {
+    const tmp  = await pool.query(queryText, values);
+
+    const p_id = tmp.rows[0].program_id;
+
+    faculty.forEach(async (element) => {
+      const queryText = 'INSERT INTO programFaculty (program_id, faculty_id) VALUES ($1, $2)';
+      const queryValues = [p_id, element];
+    
+      await pool.query(queryText, queryValues);
+    });
+
+    res.json({
+        result:"Succesfully Created Program"
+    })
+  }catch (err) {
+    res.json({ Error: "Error while Creating Program" });
+  }
+
+})
 route.get("/get-programs", async (req, res) => {
   let result = null;
 
@@ -164,12 +231,5 @@ route.delete("/delete-program", async (req, res) => {
   }
 });
 
-route.get("/get-draftprogram", async (req, res) => {
-  res.send("Draft Program");
-});
-
-route.delete("/delete-draftprogram", async (req, res) => {
-  res.send("Delete Program");
-});
 
 module.exports = route;
