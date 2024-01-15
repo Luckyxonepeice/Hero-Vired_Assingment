@@ -1,11 +1,10 @@
-import Form from './components/Form'
-import Cardpro from './components/Cardpro'
+import React from 'react'
 import './static/form.css'
+import Enrollpage from './Enrollpage';
 function App() {
   return (
     <div>
-      <Cardpro/>
-      <Form/>
+      <Enrollpage/>
     </div>
   );
 }

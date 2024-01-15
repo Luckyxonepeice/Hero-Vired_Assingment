@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import ProgramList from "./Programlist";
 
-function App() {
+function SearchBar({handleChange}) {
+  // console.log(handleProgramClick)
+
   const [inputText, setInputText] = useState("");
   const inputHandler = (e) => {
     // Convert input text to lower case
@@ -44,9 +46,9 @@ function App() {
         />
       </div>
       <h2 style={{marginBottom:'0px'}}>List of Programs</h2>
-      <ProgramList input={inputText} />
+      <ProgramList input={inputText} handleChange={handleChange}/>
     </div>
   );
 }
 
-export default App;
+export default SearchBar;

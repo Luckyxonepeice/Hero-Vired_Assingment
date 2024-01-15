@@ -1,26 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Firstrow from './Firstrow'
 import Secondrow from './Secondrow'
 import Thirdrow from './Thirdrow';
 import Button from '@mui/material/Button';
-const Form = () => {
-  const [formData, setFormData] = useState({
-    program_id: '',
-    name: '',
-    price: '',
-    domain: '',
-    program_type: '',
-    registrations_status: 'Open',
-    description: '',
-    placement_assurance: false,
-    image_url: '',
-    university_name: '',
-    learning_hours: '',
-    duration: '',
-    certificate_diploma: '',
-    eligibility_criteria: '',
-  });
+import { getFaculty,createFaculty } from '../Api/programs';
 
+
+const Form = ({input}) => {
+
+
+  const [formData, setFormData] = useState({...input});
+
+ 
+  const [faculty,setFaculty] = useState([]);
+  const [faculty_id,setFaculty_id]=useState([]);
+
+
+  async function  facultyList(){
+     const result = await getFaculty();
+     setFaculty(result);
+  }
+  useEffect(()=>{
+    facultyList();
+  },[]);
+  useEffect(() => {
+    // Update formData whenever the input prop changes
+    setFormData({ ...input });
+  }, [input]);
+
+ 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prevData) => ({
@@ -29,10 +37,12 @@ const Form = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    console.log("!!");
     e.preventDefault();
-    // Add your logic to handle form submission (e.g., API call to save data)
-    console.log('Form submitted:', formData);
+    const response = await createFaculty(formData, faculty_id);
+    console.log(response);
+    
   };
 
   // Generate dropdown options for Price
@@ -42,18 +52,10 @@ const Form = () => {
       <form onSubmit={handleSubmit}>
         <Firstrow handleChange={handleChange} formData={formData} />
         <Secondrow handleChange={handleChange} formData={formData} />
-        <Thirdrow handleChange={handleChange} formData={formData} />
+        <Thirdrow handleChange={handleChange} formData={formData} 
+        faculty={faculty} setFaculty_id={setFaculty_id} />
         {/* Row 4: Learning Hours, Duration, Certificate/Diploma */}
         <div className="form-row">
-          <label>
-            Learning Hours:
-            <input
-              type="text"
-              name="learning_hours"
-              value={formData.learning_hours}
-              onChange={handleChange}
-            />
-          </label>
           <label>
             Duration:
             <input
@@ -72,10 +74,6 @@ const Form = () => {
               onChange={handleChange}
             />
           </label>
-        </div>
-
-        {/* Row 5: Eligibility Criteria */}
-        <div className="form-row">
           <label>
             Eligibility Criteria:
             <input
@@ -84,6 +82,11 @@ const Form = () => {
               onChange={handleChange}
             />
           </label>
+        </div>
+
+        {/* Row 5: Eligibility Criteria */}
+        <div className="form-row">
+          
           <label style={{ display: 'block', width: '150px', marginBottom: '5px' }}>
           Description:
           <textarea
@@ -97,7 +100,13 @@ const Form = () => {
           </label>
           
         </div>
-        <Button variant="outlined">Outlined</Button>
+        {/* <Button variant="outlined">Outlined</Button> */}
+        <div className="form-row">
+          <Button onSubmit={handleSubmit}
+          type="submit" variant="outlined">
+            Save
+          </Button>
+        </div>
         
       </form>
     </div>

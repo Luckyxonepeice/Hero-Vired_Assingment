@@ -30,10 +30,12 @@ route.get("/get-faculty", async (req, res) => {
       });
     }
   }
-  res.json(result);
+  res.send(result);
 });
 
 route.post("/create-programs", async (req, res)=>{
+
+  console.log(req.body);
   const {
     name,
     price,
@@ -49,8 +51,9 @@ route.post("/create-programs", async (req, res)=>{
     certificate_diploma,
     eligibility_criteria,
     faculty,
+    program_id: _, // Use an underscore or any variable name you won't use
   } = req.body;
-
+  console.log(registrations_status)
   const queryText = `
   INSERT INTO programs (
     name, price, domain, program_type, registrations_status,
@@ -95,6 +98,7 @@ route.post("/create-programs", async (req, res)=>{
         result:"Succesfully Created Program"
     })
   }catch (err) {
+    console.log(err);
     res.json({ Error: "Error while Creating Program" });
   }
 

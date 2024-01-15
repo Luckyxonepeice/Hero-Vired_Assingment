@@ -37,8 +37,8 @@ export default function Firstrow({formData,handleChange}) {
           <label>
             Registrations Status:
             <select  name="registrations_status" value={formData.registrations_status} onChange={handleChange}>
-              <option value="Open">Open</option>
-              <option value="Closed">Closed</option>
+              <option value="open">Open</option>
+              <option value="closed">Closed</option>
             </select>
           </label>
         </div>

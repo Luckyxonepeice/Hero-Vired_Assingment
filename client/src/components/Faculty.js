@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Multiselect from 'multiselect-react-dropdown';
 
-export default function FacultyDropdown({ formData, handleChange }) {
-  const facultyOptions = ['Faculty A', 'Faculty B', 'Faculty C', 'Faculty D', 'Faculty some'];
 
+export default function FacultyDropdown({ faculty, setFaculty_id}) {
+
+  const data = faculty.map((ele)=>{
+    return {id:ele.faculty_id,name:ele.name};
+  })
   function OnSelect(selectedList, selectedItem) {
-    console.log(selectedItem, selectedList);
+    const list = selectedList.map((ele)=>{
+      return ele.id;
+    })
+    setFaculty_id(list)
   }
 
   function OnRemove(selectedList, selectedItem) {
-    console.log(selectedItem, selectedList);
+    const list = selectedList.map((ele)=>{
+      return ele.id;
+    })
+    setFaculty_id(list)
+    
   }
 
   return (
@@ -17,11 +27,11 @@ export default function FacultyDropdown({ formData, handleChange }) {
   <div className='faculty-row'>
     <label>Faculty</label>
     <Multiselect
-      isObject={false}
+      displayValue='name'
       onRemove={OnRemove}
       onSelect={OnSelect}
       onSearch={function noRefCheck(){}}
-      options={facultyOptions}
+      options={data}
       style={{
         multiselectContainer: {
           width: '350px', // Adjust the width as needed
