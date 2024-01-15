@@ -120,6 +120,8 @@ route.get("/get-draftprogram", async (req, res) => {
   
     try {
       await pool.query(`DELETE FROM programsdraft WHERE program_id=${id}`);
+      await pool.query(`DELETE FROM programFaculty WHERE program_id=${id}`)
+
       res.json({ result: "Deleted Successfully" });
     } catch (err) {
       res.status(404).json({

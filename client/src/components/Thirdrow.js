@@ -1,7 +1,7 @@
 import React from 'react'
 import Faculty from './Faculty'
 
-export default function Thirdrow({formData,handleChange,faculty,setFaculty_id}) {
+export default function Thirdrow({formData,handleChange,faculty,setFaculty_id,faculty_id}) {
   
   return (
     <div>
@@ -29,7 +29,7 @@ export default function Thirdrow({formData,handleChange,faculty,setFaculty_id}) 
             </select>
           </label>
 
-          <Faculty faculty={faculty} setFaculty_id={setFaculty_id} />
+          <Faculty faculty_id={faculty_id} faculty={faculty} setFaculty_id={setFaculty_id} />
         </div>
     </div>
   )

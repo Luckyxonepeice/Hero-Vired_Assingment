@@ -35,7 +35,6 @@ route.get("/get-faculty", async (req, res) => {
 
 route.post("/create-programs", async (req, res)=>{
 
-  console.log(req.body);
   const {
     name,
     price,
@@ -53,7 +52,7 @@ route.post("/create-programs", async (req, res)=>{
     faculty,
     program_id: _, // Use an underscore or any variable name you won't use
   } = req.body;
-  console.log(registrations_status)
+
   const queryText = `
   INSERT INTO programs (
     name, price, domain, program_type, registrations_status,
@@ -145,6 +144,8 @@ route.get("/get-programs", async (req, res) => {
 });
 
 route.post("/update-program", async (req, res) => {
+
+
   const {
     program_id,
     name,
@@ -222,14 +223,15 @@ route.post("/update-program", async (req, res) => {
 
 });
 
-route.delete("/delete-program", async (req, res) => {
-  const id = req.params.id;
+route.delete("/delete-program/:program_id", async (req, res) => {
+  const id = req.params.program_id;
 
   try {
     await pool.query(`DELETE FROM programs WHERE program_id=${id}`);
+    await pool.query(`DELETE FROM programFaculty WHERE program_id=${id}`)
     res.json({ result: "Deleted Successfully" });
   } catch (err) {
-    res.status(404).json({
+    res.status(505).json({
       Error: "Error on Deletion of Programs",
     });
   }

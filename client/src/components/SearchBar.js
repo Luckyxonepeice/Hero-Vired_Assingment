@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ProgramList from "./Programlist";
-
-function SearchBar({handleChange}) {
+import Draftdata from './Draftdata';
+function SearchBar({handleChange,data,draftData,showDraft}) {
   // console.log(handleProgramClick)
 
   const [inputText, setInputText] = useState("");
@@ -46,7 +46,10 @@ function SearchBar({handleChange}) {
         />
       </div>
       <h2 style={{marginBottom:'0px'}}>List of Programs</h2>
-      <ProgramList input={inputText} handleChange={handleChange}/>
+      
+      {showDraft?
+      <Draftdata input={inputText} handleChange={handleChange} draftData={draftData}/>:
+      <ProgramList input={inputText} handleChange={handleChange} data={data}/>}
     </div>
   );
 }

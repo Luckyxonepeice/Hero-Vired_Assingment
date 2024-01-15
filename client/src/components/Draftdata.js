@@ -1,11 +1,11 @@
 import React,{useEffect,useState} from 'react'
 
-const ProgramList = ({input,handleChange,data}) => {
+const ProgramList = ({input,handleChange,draftData}) => {
 
 
   
 
-  const filteredData = data.filter((programs) => {
+  const filteredData = draftData.filter((programs) => {
     //if no input the return the original
     if (input === '') {
         return programs;
