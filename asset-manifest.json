@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Hero-Vired_Assingment/static/css/main.af79181b.css",
-    "main.js": "/Hero-Vired_Assingment/static/js/main.8787ac24.js",
+    "main.js": "/Hero-Vired_Assingment/static/js/main.77368092.js",
     "index.html": "/Hero-Vired_Assingment/index.html",
     "main.af79181b.css.map": "/Hero-Vired_Assingment/static/css/main.af79181b.css.map",
-    "main.8787ac24.js.map": "/Hero-Vired_Assingment/static/js/main.8787ac24.js.map"
+    "main.77368092.js.map": "/Hero-Vired_Assingment/static/js/main.77368092.js.map"
   },
   "entrypoints": [
     "static/css/main.af79181b.css",
-    "static/js/main.8787ac24.js"
+    "static/js/main.77368092.js"
   ]
 }
