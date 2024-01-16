@@ -8,4 +8,4 @@
 # production
 /client/build
 /server/node_modules
-/server/vars
+
