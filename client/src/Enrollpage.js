@@ -63,9 +63,9 @@ export default function Enroll_page() {
       <Button onClick={handleDraftToggle} 
       style={{
         position: 'absolute',
-        top: '18px',
-        right: '90rem', // Adjust the right position to your preference
-        padding: '8px',
+        top: '14px',
+        left:'10rem',// Adjust the right position to your preference
+        padding: '5px',
         backgroundColor:'white',
         color: showDraft ? 'grey' : 'green',
         border: 'solid',
