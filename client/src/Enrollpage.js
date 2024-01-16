@@ -27,6 +27,7 @@ export default function Enroll_page() {
   const [selectedProgram, setSelectedProgram] = useState({ ...default_data });
   const [show,setShow]=useState(false);
   const [showDraft, setShowDraft] = useState(false);
+  const [faculty_id, setFaculty_id] = useState([])
 
   const handleProgramClick = (program) => {
     program.price = Number(program.price);
@@ -58,7 +59,7 @@ export default function Enroll_page() {
         cursor: 'pointer'
       }} 
       />
-      <Cardpro handleProgramClick={handleProgramClick} showDraft={showDraft}/>
+      <Cardpro setFaculty_id={setFaculty_id} handleProgramClick={handleProgramClick} showDraft={showDraft}/>
       <Button onClick={handleDraftToggle} 
       style={{
         position: 'absolute',
@@ -78,6 +79,8 @@ export default function Enroll_page() {
           input={selectedProgram}
           editMode={editMode}
           setEditMode={setEditMode}
+          faculty_id={faculty_id}
+          setFaculty_id={setFaculty_id}
         />
       )}
     </div>

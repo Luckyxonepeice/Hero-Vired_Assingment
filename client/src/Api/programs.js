@@ -52,3 +52,7 @@ export async function deleteProgram(program_id){
 
     return response.json();
 }
+export async function getProgram(id){
+    const result = await fetch(`${API_URL}/program/get-program?id=${id}`);
+    return result.json();
+}

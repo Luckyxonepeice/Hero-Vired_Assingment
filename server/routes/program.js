@@ -117,7 +117,7 @@ route.get("/get-programs", async (req, res) => {
       const faculty = await pool.query(
         `SELECT * FROM programFaculty WHERE program_id = ${id}`
       );
-
+      
       result = {
         program: program.rows,
         faculty: faculty.rows,
@@ -140,6 +140,29 @@ route.get("/get-programs", async (req, res) => {
       });
     }
   }
+  res.json(result);
+});
+
+route.get("/get-program", async (req, res) => {
+    const id = req.query.id;
+
+    try {
+      const program = await pool.query(
+        `SELECT * FROM programs WHERE program_id = ${id}`
+      );
+      const faculty = await pool.query(
+        `SELECT * FROM programFaculty WHERE program_id = ${id}`
+      );
+      
+      result = {
+        program: program.rows,
+        faculty: faculty.rows,
+      };
+    } catch (err) {
+      res.json({
+        Error: "Error on Retreival of Programs",
+      });
+    }
   res.json(result);
 });
 

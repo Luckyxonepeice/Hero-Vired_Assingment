@@ -1,21 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Multiselect from 'multiselect-react-dropdown';
+import { getProgram } from '../Api/programs';
 
+export default function FacultyDropdown({ id , faculty_id,faculty, setFaculty_id}) {
 
-export default function FacultyDropdown({ faculty_id,faculty, setFaculty_id}) {
-
-  
   const data  = faculty.map((ele)=>{
     return {id:ele.faculty_id,name:ele.name};
   })
-  let selectedData=[]
-  if (faculty_id.length) {
-    selectedData = data.map((ele) => {
-
-      return faculty_id.includes(ele.id)
-    })
-  }
-
+  
+  
   function OnSelect(selectedList, selectedItem) {
     const list = selectedList.map((ele)=>{
       return ele.id;

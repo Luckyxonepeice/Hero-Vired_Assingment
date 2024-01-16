@@ -8,15 +8,14 @@ import { IoSave } from "react-icons/io5";
 import { RxUpdate } from "react-icons/rx";
 import { RiSave2Fill } from 'react-icons/ri';
 import { getFaculty, createProgram,updateProgram,deleteProgram} from '../Api/programs';
-import { createDraftProgram } from '../Api/draftprogram';
+import { createDraftProgram , deleteDraftProgram} from '../Api/draftprogram';
 
 
-const Form = ({ input,editMode,setEditMode}) => {
-
+const Form = ({ input,editMode,setEditMode,faculty_id,setFaculty_id}) => {
   const [formData, setFormData] = useState({ ...input });
   const [faculty, setFaculty] = useState([]);
-  const [faculty_id, setFaculty_id] = useState([]);
-   // New state for tracking edit mode
+
+
 
   async function facultyList() {
     const result = await getFaculty();
@@ -44,6 +43,8 @@ const Form = ({ input,editMode,setEditMode}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    
     if (formData.program_id === null) {
       // If program_id is null, it's a new program, so call createProgram
       const {result,Error} = await createProgram(formData, faculty_id);
@@ -54,10 +55,11 @@ const Form = ({ input,editMode,setEditMode}) => {
        }
       setEditMode(false);
     } else {
+      
+      const {result,Error} = await updateProgram(formData, faculty_id);
+      alert(result);
       // If program_id exists, it's an existing program, so call updateProgram
-      const response = await updateProgram(formData, faculty_id);
-      console.log(response);
-      setEditMode(false); // Disable edit mode after updating
+      setEditMode(false); 
     }
   };
 

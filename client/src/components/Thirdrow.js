@@ -2,7 +2,8 @@ import React from 'react'
 import Faculty from './Faculty'
 
 export default function Thirdrow({formData,handleChange,faculty,setFaculty_id,faculty_id}) {
-  
+
+
   return (
     <div>
       {/* Row 3: Image URL, University Name */}
@@ -29,7 +30,7 @@ export default function Thirdrow({formData,handleChange,faculty,setFaculty_id,fa
             </select>
           </label>
 
-          <Faculty faculty_id={faculty_id} faculty={faculty} setFaculty_id={setFaculty_id} />
+          <Faculty id={formData.program_id} faculty_id={faculty_id} faculty={faculty} setFaculty_id={setFaculty_id} />
         </div>
     </div>
   )

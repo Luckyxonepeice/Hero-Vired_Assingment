@@ -3,13 +3,14 @@ import ProgramList from './Programlist'
 import SearchBar from './SearchBar'
 import { getPrograms } from '../Api/programs'
 import { getDraftPrograms } from '../Api/draftprogram'
-export default function Cardpro({handleProgramClick,showDraft}) {
+export default function Cardpro({setFaculty_id,handleProgramClick,showDraft}) {
 
 //  console.log(handleProgramClick)
   const [data, setData] = useState([]);
   const [draftData, setDraftData] = useState([]);
   async function programList(){
     const {program,faculty} = await getPrograms();
+   
     setData(program);
   }
 

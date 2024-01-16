@@ -2,9 +2,6 @@ import React,{useEffect,useState} from 'react'
 
 const ProgramList = ({input,handleChange,draftData}) => {
 
-
-  
-
   const filteredData = draftData.filter((programs) => {
     //if no input the return the original
     if (input === '') {
